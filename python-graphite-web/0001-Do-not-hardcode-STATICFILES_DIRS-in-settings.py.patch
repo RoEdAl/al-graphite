@@ -1,0 +1,36 @@
+From 7598bf9b21f37c98f54d55fa7c1c840f772555c5 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <reod@onet.eu>
+Date: Tue, 26 Mar 2019 20:49:47 +0100
+Subject: [PATCH 1/4] Do not hardcode STATICFILES_DIRS in settings.py
+
+Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
+
+diff --git a/webapp/graphite/settings.py b/webapp/graphite/settings.py
+index 26930847..5250401c 100644
+--- a/webapp/graphite/settings.py
++++ b/webapp/graphite/settings.py
+@@ -206,6 +206,10 @@ DATABASES = None
+ # If using rrdcached, set to the address or socket of the daemon
+ FLUSHRRDCACHED = ''
+ 
++STATICFILES_DIRS = (
++    join(WEBAPP_DIR, 'content'),
++)
++
+ ## Load our local_settings
+ SETTINGS_MODULE = os.environ.get('GRAPHITE_SETTINGS_MODULE', 'graphite.local_settings')
+ try:
+@@ -218,10 +222,6 @@ if not GRAPHITE_WEB_APP_SETTINGS_LOADED:
+   from graphite.app_settings import *  # noqa
+ 
+ 
+-STATICFILES_DIRS = (
+-    join(WEBAPP_DIR, 'content'),
+-)
+-
+ # Handle renamed timeout settings
+ FIND_TIMEOUT = FIND_TIMEOUT or REMOTE_FIND_TIMEOUT or 3.0
+ FETCH_TIMEOUT = FETCH_TIMEOUT or REMOTE_FETCH_TIMEOUT or 6.0
+-- 
+2.21.0
+

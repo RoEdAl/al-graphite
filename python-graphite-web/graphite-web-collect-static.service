@@ -1,0 +1,6 @@
+[Unit]
+Description=Graphite - Web Application - Static files initialization or update
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/django-admin collectstatic --noinput --settings=graphite.settings

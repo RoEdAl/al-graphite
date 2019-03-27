@@ -1,0 +1,23 @@
+From 7d4389cb7cf23da022c8439ead6ac3260d07f928 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <reod@onet.eu>
+Date: Tue, 26 Mar 2019 21:05:19 +0100
+Subject: [PATCH 3/4] util.logtime - raise log level from info to debug
+
+Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
+
+diff --git a/webapp/graphite/util.py b/webapp/graphite/util.py
+index 3adaa6ed..ec101adb 100644
+--- a/webapp/graphite/util.py
++++ b/webapp/graphite/util.py
+@@ -254,7 +254,7 @@ class Timer(object):
+     self.name = name
+ 
+   def stop(self):
+-    log.info(
++    log.debug(
+       '{name} :: {msg} {sec:.6}s'.format(
+         name=self.name,
+         msg=self.msg,
+-- 
+2.21.0
+

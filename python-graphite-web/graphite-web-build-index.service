@@ -1,0 +1,6 @@
+[Unit]
+Description=Graphite - Web Application - Index builder
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/graphite-web/build-index

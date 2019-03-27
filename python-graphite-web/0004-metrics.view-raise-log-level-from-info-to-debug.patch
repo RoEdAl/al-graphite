@@ -1,0 +1,26 @@
+From 2aedbfb7de2a50a605149eaebd07dd89e0db5280 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <reod@onet.eu>
+Date: Tue, 26 Mar 2019 21:15:20 +0100
+Subject: [PATCH 4/4] metrics.view - raise log level from info to debug
+
+Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
+
+diff --git a/webapp/graphite/metrics/views.py b/webapp/graphite/metrics/views.py
+index df6978b0..c56b234a 100644
+--- a/webapp/graphite/metrics/views.py
++++ b/webapp/graphite/metrics/views.py
+@@ -131,9 +131,9 @@ def find_view(request):
+     log.exception()
+     raise
+ 
+-  log.info('find_view query=%s local_only=%s matches=%d' % (query, local_only, len(matches)))
++  log.debug('find_view query=%s local_only=%s matches=%d' % (query, local_only, len(matches)))
+   matches.sort(key=lambda node: node.name)
+-  log.info("received remote find request: pattern=%s from=%s until=%s local_only=%s format=%s matches=%d" % (query, fromTime, untilTime, local_only, format, len(matches)))
++  log.debug("received remote find request: pattern=%s from=%s until=%s local_only=%s format=%s matches=%d" % (query, fromTime, untilTime, local_only, format, len(matches)))
+ 
+   if format == 'treejson':
+     profile = getProfile(request)
+-- 
+2.21.0
+

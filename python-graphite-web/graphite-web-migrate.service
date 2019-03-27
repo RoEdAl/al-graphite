@@ -1,0 +1,7 @@
+[Unit]
+Description=Graphite - Web Application - Migration (Database initialization)
+AssertPathExists=!/var/lib/graphite-web/graphite.db
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/django-admin migrate --settings=graphite.settings --run-syncdb

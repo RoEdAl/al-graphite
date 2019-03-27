@@ -1,0 +1,25 @@
+# Maintainer: Edmunt Pienkowsky <roed@onet.eu>
+
+pkgname=python-django-tagging
+_pkgname=django-tagging
+pkgver=0.4.5
+pkgrel=1
+pkgdesc="A generic tagging application for Django projects"
+arch=('any')
+url='https://pypi.python.org/pypi/django-tagging'
+license=('MIT')
+depends=('python-django')
+makedepends=('python-setuptools')
+source=("https://pypi.python.org/packages/source/d/django-tagging/django-tagging-${pkgver}.tar.gz")
+sha256sums=('98fc9d3bd9387d5c7c44c31a753a6f93385a6b314803488954968a75cd0b7102')
+
+build() { 
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python setup.py build
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python setup.py install --root=${pkgdir} --optimize=2
+  install -D -m644 LICENSE.txt ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+}

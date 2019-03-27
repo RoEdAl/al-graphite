@@ -1,0 +1,117 @@
+# Maintainer: Edmunt Pienkowsky <roed@onet.eu>
+
+pkgname=python-graphite-web
+_pkgname=graphite-web
+pkgver=1.1.5
+pkgrel=1
+pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
+url='http://graphiteapp.org/'
+arch=('any')
+license=('Apache 2.0')
+depends=(
+  python-cairo python-urllib3 python-simplejson python-pyparsing python-whitenoise python-memcached python-pytz
+  python-django python-django-tagging 
+  uwsgi uwsgi-plugin-python
+  ttf-dejavu  python-whisper 
+  "carbon>=${pkgver}"
+)
+makedepends=('python-setuptools')
+_patches=(
+    '0001-Do-not-hardcode-STATICFILES_DIRS-in-settings.py.patch'
+    '0002-Support-logging-to-systemd-journal.patch'
+    '0003-util.logtime-raise-log-level-from-info-to-debug.patch'
+    '0004-metrics.view-raise-log-level-from-info-to-debug.patch'
+)
+source=(
+        "${_pkgname}-${pkgver}.tar.gz::http://github.com/graphite-project/graphite-web/archive/${pkgver}.tar.gz"
+	${_patches[@]}
+	'uwsgi-graphite.ini'
+	'wsgi.py'
+	'local_settings.py'
+	'tmpfiles.conf'
+	'graphite-web-migrate.service'
+	'graphite-web-build-index.service'
+	'graphite-web-collect-static.service'
+	'graphite-web-paranoid-security.conf'
+	'graphite-web-carbon-user.conf'
+	'nginx-graphite.conf'
+)
+
+backup=(
+    "etc/${_pkgname}/local_settings.py"
+    "etc/${_pkgname}/uwsgi-graphite.ini"
+)
+
+sha256sums=('c8455b8b3231698eb2d1db73bcb0f4ba89adf0a0b86f1035e5e256a5d2a73784'
+            'dd4708399c45f87fb93cfd0b67690485ef470d0318453eef0a5ec1e5a30d0dff'
+            '2effe36e66ff63fd2f391838f7ff63c6141e43ea14c8810a0050303577fd4e5c'
+            'e0926154ab26fd4a60fbd7cb6451d149ef5d03ef5c3ebeac64371ffd931e81e1'
+            '4882260b66aa053d7b29fef0f3c49791c8a722f79a0e9b7b51286776c5a68fe8'
+            'fb094e52711eb397cdb968a69854d0e304bc31935f9893ec652642cce5557a6a'
+            '802c2be2a71339c81f564457364a5fed1bc0a314ab6e08405063d219aeab2b6e'
+            'c2006af02edb39d2aada59cdbf89288de113043d588de56295cd3f12eee4c0d3'
+            '2290e77cb667a18a7172768df068526ba54bdd94d39d8d591c0fb3632747bbf0'
+            '7446d17a1ee2d8c48147072eb6dd7652d2b3ca3e95509ac29438893cd57bdd24'
+            '157949a2a5da14c3328880d24af4e3e126c056cf602fae0376a01d4a5d9ba9d9'
+            '07ecf36bce53dc5d7a58f53a806a561ca0cc9c290c484256205de0676f8d4d53'
+            '5b6cf9b81f435e3527c4fdd108a88e4eb2037c0b1f66d2179c9fa7aeac6dcde3'
+            'f568124d9a046e777f6ce9630ee603c98f25d4ce17436aa652dbcac45592a750'
+            'a87b404a7068f03916eaac8d042ccb391404a8bfb6cb20d689ad3a8ef056349e')
+
+prepare() {
+    cd ${srcdir}/${_pkgname}-${pkgver}
+    for p in ${_patches[@]}; do
+      msg2 "Applying $p"
+      git apply ${srcdir}/${p}
+    done
+}
+
+build() {
+    cd ${srcdir}/${_pkgname}-${pkgver}
+    python setup.py build
+}
+
+package() {
+    cd ${srcdir}/${_pkgname}-${pkgver}
+    env GRAPHITE_NO_PREFIX=True  python setup.py install --root=${pkgdir} --optimize=2
+    rm -rf $pkgdir/srv/graphite
+
+    # additional files
+    install -dm755 ${pkgdir}/etc/${_pkgname}
+    install -dm755 ${pkgdir}/etc/uwsgi
+    install -dm755 ${pkgdir}/usr/share/${_pkgname}
+    install -Dm644 ${srcdir}/local_settings.py ${pkgdir}/etc/${_pkgname}/local_settings.py
+    install -Dm644 ${srcdir}/uwsgi-graphite.ini ${pkgdir}/etc/${_pkgname}/uwsgi-graphite.ini
+    install -Dm644 ${srcdir}/wsgi.py $pkgdir/usr/lib/${_pkgname}/wsgi.py
+    ln -s /etc/${_pkgname}/uwsgi-graphite.ini ${pkgdir}/etc/uwsgi/graphite.ini
+    mv ${pkgdir}/usr/webapp ${pkgdir}/usr/share/${_pkgname}
+    mv ${pkgdir}/usr/examples ${pkgdir}/usr/share/${_pkgname}
+    mv ${pkgdir}/usr/conf ${pkgdir}/usr/share/${_pkgname}
+    rm -rf ${pkgdir}/usr/storage
+
+    # local_settings.py
+    for l in $(find ${pkgdir}/usr/lib -name local_settings.py.example); do
+      mv ${l} ${pkgdir}/usr/share/${_pkgname}/conf
+      ln -s /etc/${_pkgname}/local_settings.py ${l%.example}
+      break
+    done
+
+    rm ${pkgdir}/usr/bin/run-graphite-devel-server.py
+    rm ${pkgdir}/usr/bin/build-index.sh
+    mv ${pkgdir}/usr/bin/build-index ${pkgdir}/usr/lib/${_pkgname}/build-index
+    rmdir ${pkgdir}/usr/bin
+
+    # nginx - configuration
+    install -Dm644 ${srcdir}/nginx-graphite.conf ${pkgdir}/usr/share/${_pkgname}/conf/nginx-graphite.conf
+
+    # tmpfiles
+    install -Dm644 ${srcdir}/tmpfiles.conf ${pkgdir}/usr/lib/tmpfiles.d/${pkgname}.conf
+
+    # systemd
+    for s in migrate build-index collect-static; do
+      install -Dm644 ${srcdir}/${_pkgname}-${s}.service ${pkgdir}/usr/lib/systemd/system/${_pkgname}-${s}.service
+    done
+    for s in paranoid-security carbon-user; do
+      install -Dm644 ${srcdir}/${_pkgname}-${s}.conf ${pkgdir}/usr/lib/systemd/system/${_pkgname}-.service.d/${s}.conf
+    done
+}

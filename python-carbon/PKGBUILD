@@ -1,0 +1,100 @@
+# Maintainer: Edmunt Pienkowsky <roed@onet.eu>
+
+pkgname=python-carbon
+_pkgname=carbon
+pkgver=1.1.5
+pkgrel=1
+pkgdesc='Twisted daemon that listens for time-series data'
+url='http://graphiteapp.org/'
+arch=('any')
+license=('Apache 2.0')
+depends=('python' 'python-twisted' 'python-cachetools' 'python-protobuf' 'python-urllib3' 'python-six' 'python-whisper>=1.1.5')
+makedepends=('python-setuptools')
+provides=("carbon=${pkgver}")
+backup=(
+  etc/carbon/carbon.conf
+  etc/carbon/storage-schemas.conf
+  etc/carbon/storage-aggregation.conf
+)
+_patches=(
+  '0001-Simplify-logging-to-console-stdout.patch'
+)
+source=(
+  "${_pkgname}-${pkgver}.tar.gz::http://github.com/graphite-project/carbon/archive/${pkgver}.tar.gz"
+  ${_patches[@]}
+  sysusers.conf
+  tmpfiles.conf
+  carbon.conf
+  storage-schemas.conf
+  storage-aggregation.conf
+  carbon-cache.service
+  carbon-cache\@.service
+  carbon-relay.service
+  carbon-relay\@.service
+  carbon-aggregator.service
+  carbon-aggregator\@.service
+  carbon-aggregator-cache.service
+  carbon-aggregator-cache\@.service
+  carbon-paranoid-security.conf
+)
+sha256sums=('fe4278eead6f2e8726c6576cdb0a6fde8a28cfd851309f82927ce6dcda38ff31'
+            '8eca4b0afb540d94844dcbfeaf5f3bb7c9567753ae43f7b536ab4bf76fd5bf66'
+            'ea0f85ef52a9b6b1b63d67546de14e7d5066f888946eb9d4d4481c1eb583db7b'
+            'a8431c6ea63efdd1a9898a94c90afcf33307c8d266c977d6e86244bfc0ddefe1'
+            'c99b6084306099b3d198e851ea1002cc6b7b69cff697d98bc040d9470cd240b2'
+            'a880ce74c5eb0fa7f23fe674d155e18ea8f6281083e6b1953c6660f2cc326855'
+            '8527eafc996ac59dcb91649009e9e2168f2b43ec8fde01441a4697b241b83e2a'
+            '803739c0b966ab66a163e43dccf52a45a1493d9a84ee12d6917ce0f85e4400d7'
+            '91737a812ffecda90d1ad32d02d460e94529334c26f78d5d993b87fa8a842d1b'
+            'fa7b8a029a8fc703bb679751ea1274c64e46660a0ca95ea29d511c9d90eb5ac9'
+            '1eb4ece7b5c198200e275bf013160fc5a786532d45bcd4432f8b130eba08fe0e'
+            'dc780bd3e439569ba65abaf53fe75bcdf52993dd40e75d9f0543e53766a2341e'
+            '693ab8d5adeab960638813585007883bbefbf3cd1b419ed4484c49c4518196cf'
+            '77f7745442b43e98a8e53d23deb61f9321d9d5c6a705d4fa1c83deb8522e81c0'
+            'b92911600521c058c9ddcb07dca3de5d215ac97c9335a19e52d7eaf36fdfef11'
+            '6257941d49e8e430fd41a5281835cf208aa856ca1ea140eb8c7cadc27fcd1e43')
+
+prepare() {
+  cd ${srcdir}/${_pkgname}-${pkgver}
+  for p in ${_patches[@]}; do
+    msg2 "Applying $p"
+    git apply ${srcdir}/${p}
+  done
+}
+
+build() { 
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  python setup.py build
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+
+  env GRAPHITE_NO_PREFIX=True python setup.py install --root=${pkgdir} --optimize=2
+
+  install -d -m755 ${pkgdir}/usr/share/${_pkgname}
+  rm -rf ${pkgdir}/usr/storage
+  rm -rf ${pkgdir}/usr/examples
+  mv ${pkgdir}/usr/conf ${pkgdir}/usr/share/${_pkgname}
+
+  # remove .py suffix
+  for i in ${pkgdir}/usr/bin/*.py; do
+    mv ${i} ${i%%.py}
+  done
+
+  install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
+
+  install -D -m644 ${srcdir}/sysusers.conf ${pkgdir}/usr/lib/sysusers.d/${pkgname}.conf
+  install -D -m644 ${srcdir}/tmpfiles.conf ${pkgdir}/usr/lib/tmpfiles.d/${pkgname}.conf
+
+  install -D -m644 ${srcdir}/carbon.conf ${pkgdir}/etc/carbon/carbon.conf
+  install -D -m644 ${srcdir}/storage-schemas.conf ${pkgdir}/etc/carbon/storage-schemas.conf
+  install -D -m644 ${srcdir}/storage-aggregation.conf ${pkgdir}/etc/carbon/storage-aggregation.conf
+
+  install -d -m755 ${pkgdir}/usr/lib/systemd/system/carbon-.service.d
+  for i in cache relay aggregator aggregator-cache; do
+    install -D -m644 ${srcdir}/carbon-${i}.service ${pkgdir}/usr/lib/systemd/system/carbon-${i}.service
+    install -D -m644 ${srcdir}/carbon-${i}\@.service ${pkgdir}/usr/lib/systemd/system/carbon-${i}\@.service
+  done
+  install -D -m644 ${srcdir}/carbon-paranoid-security.conf ${pkgdir}/usr/lib/systemd/system/carbon-.service.d/paranoid-security.conf
+}
