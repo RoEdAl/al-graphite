@@ -10,6 +10,7 @@ arch=('any')
 license=('Apache 2.0')
 depends=(
   python-cairo python-urllib3 python-simplejson python-pyparsing python-whitenoise python-memcached python-pytz
+  python-systemd
   python-django python-django-tagging 
   uwsgi uwsgi-plugin-python
   ttf-dejavu  python-whisper 
