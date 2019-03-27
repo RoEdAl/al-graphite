@@ -27,9 +27,6 @@ STORAGE_DIR = '/var/lib/graphite-web'
 STATICFILES_DIRS = ('/usr/share/graphite-web/webapp/content',)
 LOG_DIR = '/var/log/graphite-web/'
 
-DASHBOARD_CONF = '/etc/graphite-web/dashboard.conf'
-GRAPHTEMPLATES_CONF = '/etc/graphite-web/graphTemplates.conf'
-
 WHISPER_DIR = '/var/lib/carbon/whisper'
 STANDARD_DIRS = [WHISPER_DIR]
 
