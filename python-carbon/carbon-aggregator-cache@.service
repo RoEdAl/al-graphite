@@ -4,8 +4,6 @@ After=network.target
 ConditionPathExists=%E/carbon/carbon.conf
 
 [Service]
-User=carbon
-Group=carbon
 ExecStart=/usr/bin/carbon-aggregator-cache --nodaemon --config=%E/carbon/carbon.conf --instance=%I --pidfile=%t/%p-%i/pid start
 RuntimeDirectory=%p-%i
 

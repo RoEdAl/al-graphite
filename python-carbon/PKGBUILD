@@ -36,6 +36,7 @@ source=(
   carbon-aggregator-cache.service
   carbon-aggregator-cache\@.service
   carbon-paranoid-security.conf
+  carbon-carbon-user.conf
 )
 sha256sums=('fe4278eead6f2e8726c6576cdb0a6fde8a28cfd851309f82927ce6dcda38ff31'
             '8eca4b0afb540d94844dcbfeaf5f3bb7c9567753ae43f7b536ab4bf76fd5bf66'
@@ -44,15 +45,16 @@ sha256sums=('fe4278eead6f2e8726c6576cdb0a6fde8a28cfd851309f82927ce6dcda38ff31'
             'c99b6084306099b3d198e851ea1002cc6b7b69cff697d98bc040d9470cd240b2'
             'a880ce74c5eb0fa7f23fe674d155e18ea8f6281083e6b1953c6660f2cc326855'
             '8527eafc996ac59dcb91649009e9e2168f2b43ec8fde01441a4697b241b83e2a'
-            '803739c0b966ab66a163e43dccf52a45a1493d9a84ee12d6917ce0f85e4400d7'
-            '91737a812ffecda90d1ad32d02d460e94529334c26f78d5d993b87fa8a842d1b'
-            'fa7b8a029a8fc703bb679751ea1274c64e46660a0ca95ea29d511c9d90eb5ac9'
-            '1eb4ece7b5c198200e275bf013160fc5a786532d45bcd4432f8b130eba08fe0e'
-            'dc780bd3e439569ba65abaf53fe75bcdf52993dd40e75d9f0543e53766a2341e'
-            '693ab8d5adeab960638813585007883bbefbf3cd1b419ed4484c49c4518196cf'
-            '77f7745442b43e98a8e53d23deb61f9321d9d5c6a705d4fa1c83deb8522e81c0'
-            'b92911600521c058c9ddcb07dca3de5d215ac97c9335a19e52d7eaf36fdfef11'
-            '6257941d49e8e430fd41a5281835cf208aa856ca1ea140eb8c7cadc27fcd1e43')
+            '25c2726b81234cd36d69e244f7d6f118c4034f229ccd793d1e7d453f48af04a9'
+            '9f298bda7abe5b9ea160704058a1da6fb548dfab31b9a8a7815c1f40b8664dfc'
+            '82d52a7afa4c0c0d39f0dd7d82f7c3af859390ed3db85d42d79b97702453e947'
+            'a08bb135d05aab805dbee499ebb80b2b2f7c0636256a667d95f62855fb43be28'
+            'fb928956ed2ca844d5f486b53e9c2b791fafd28757c876f6b4cec2e6d00307e9'
+            'faae4dbf990c32e091a74eeb18e01ef8d8e1b30734218afd7c0d1118a2f21495'
+            '4fada347abc554c98196c306cbb1a5991cca6275ddf5d072589b8244dc7765d0'
+            'f971c97d8abed56d28eb466527bdf6693e46837df2c73fef5734a1cf332bdd99'
+            '6257941d49e8e430fd41a5281835cf208aa856ca1ea140eb8c7cadc27fcd1e43'
+            'f568124d9a046e777f6ce9630ee603c98f25d4ce17436aa652dbcac45592a750')
 
 prepare() {
   cd ${srcdir}/${_pkgname}-${pkgver}
@@ -96,5 +98,7 @@ package() {
     install -D -m644 ${srcdir}/carbon-${i}.service ${pkgdir}/usr/lib/systemd/system/carbon-${i}.service
     install -D -m644 ${srcdir}/carbon-${i}\@.service ${pkgdir}/usr/lib/systemd/system/carbon-${i}\@.service
   done
-  install -D -m644 ${srcdir}/carbon-paranoid-security.conf ${pkgdir}/usr/lib/systemd/system/carbon-.service.d/paranoid-security.conf
+  for i in carbon-user paranoid-security; do
+    install -D -m644 ${srcdir}/carbon-${i}.conf ${pkgdir}/usr/lib/systemd/system/carbon-.service.d/${i}.conf
+  done
 }
