@@ -1,7 +1,7 @@
 From 2aedbfb7de2a50a605149eaebd07dd89e0db5280 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 21:15:20 +0100
-Subject: [PATCH 4/4] metrics.view - raise log level from info to debug
+Subject: [PATCH 4/5] metrics.view - raise log level from info to debug
 
 Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
 

@@ -1,7 +1,7 @@
 From 7d4389cb7cf23da022c8439ead6ac3260d07f928 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 21:05:19 +0100
-Subject: [PATCH 3/4] util.logtime - raise log level from info to debug
+Subject: [PATCH 3/5] util.logtime - raise log level from info to debug
 
 Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
 

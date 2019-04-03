@@ -1,7 +1,7 @@
 From a9a8217ef4704c195aa7e0f9ba3de4b3cce561ce Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 20:05:08 +0100
-Subject: [PATCH 2/4] Support logging to systemd journal
+Subject: [PATCH 2/5] Support logging to systemd journal
 
 By specyifying + as log filename.
 

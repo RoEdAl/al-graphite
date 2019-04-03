@@ -19,7 +19,7 @@ LOG_FILE_EXCEPTION = '+'
 LOG_FILE_CACHE = '+'
 LOG_FILE_RENDERING = '+'
 
-#DEBUG = True
+# DEBUG = True
 
 GRAPHITE_ROOT = '/var/lib/graphite-web'
 CONF_DIR = '/etc/graphite-web/'
@@ -31,3 +31,5 @@ WHISPER_DIR = '/var/lib/carbon/whisper'
 STANDARD_DIRS = [WHISPER_DIR]
 
 AUTO_REFRESH_INTERVAL = 120
+
+# CARBONLINK_HOSTS = ["[::1]:7002:ip6"]
