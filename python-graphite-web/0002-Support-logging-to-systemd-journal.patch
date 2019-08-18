@@ -1,11 +1,12 @@
-From a9a8217ef4704c195aa7e0f9ba3de4b3cce561ce Mon Sep 17 00:00:00 2001
+From 5a23cdc158e3db06a89564b2ac3e2c3484d014b0 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 20:05:08 +0100
-Subject: [PATCH 2/5] Support logging to systemd journal
+Subject: [PATCH 2/6] Support logging to systemd journal
 
 By specyifying + as log filename.
 
 Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/webapp/graphite/logger.py b/webapp/graphite/logger.py
 index 9cbc4699..b7f71305 100644
@@ -30,5 +31,5 @@ index 9cbc4699..b7f71305 100644
              formatter = logging.Formatter(
                  fmt='%(asctime)s.%(msecs)03d :: %(message)s',
 -- 
-2.21.0
+2.22.1
 

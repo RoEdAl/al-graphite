@@ -1,9 +1,10 @@
-From 7d4389cb7cf23da022c8439ead6ac3260d07f928 Mon Sep 17 00:00:00 2001
+From ecbe1daaf4ac967975f9a8c7d808178ac795563c Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 21:05:19 +0100
-Subject: [PATCH 3/5] util.logtime - raise log level from info to debug
+Subject: [PATCH 3/6] util.logtime - raise log level from info to debug
 
 Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/webapp/graphite/util.py b/webapp/graphite/util.py
 index 3adaa6ed..ec101adb 100644
@@ -19,5 +20,5 @@ index 3adaa6ed..ec101adb 100644
          name=self.name,
          msg=self.msg,
 -- 
-2.21.0
+2.22.1
 

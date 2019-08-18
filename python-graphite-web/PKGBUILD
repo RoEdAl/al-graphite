@@ -3,7 +3,7 @@
 pkgname=python-graphite-web
 _pkgname=graphite-web
 pkgver=1.1.5
-pkgrel=2
+pkgrel=3
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -23,6 +23,7 @@ _patches=(
     '0003-util.logtime-raise-log-level-from-info-to-debug.patch'
     '0004-metrics.view-raise-log-level-from-info-to-debug.patch'
     '0005-Accept-IPv6-addresses-in-CARBONLINK_HOSTS.patch'
+    '0006-Avoid-admin.E406-error.patch'
 )
 source=(
         "${_pkgname}-${pkgver}.tar.gz::http://github.com/graphite-project/graphite-web/archive/${pkgver}.tar.gz"
@@ -45,11 +46,12 @@ backup=(
 )
 
 sha256sums=('c8455b8b3231698eb2d1db73bcb0f4ba89adf0a0b86f1035e5e256a5d2a73784'
-            'fe02d2760aae3801c28710eb970afcfc1fdd936bb49f7fa044d10a531497c76e'
-            '16193121458f10eca56c41c82724c12d6d6e5053ab679c910b55700090cf5e9f'
-            'a6a5a2c80d327fa952b698d27208cb5f57ed98f56204ec0a5f676eb7c0731d8d'
-            'f58054135e8e2e7683507a31875cb12265169fece3a848e5131112b5ea07a0a6'
-            'e0eaf02914a8bcd36fdbe7e044484512049fea08931e4d7198a06d2f4b926083'
+            '6e10e3de76216bac213e365262d7ff11078b396ce79ce8b2daad2bc0f4f3d332'
+            '86f4db23637e450bfdbadaa289c1a44b54375db8cc3d9885612c20e1c755e8aa'
+            '4f1a8aa7688a3e0b050ab428fd82d532d20174355e34ef8ce346982becf41edd'
+            '4929cc9db62a4d6d2139977545abdf10b293427dfc119a67fa526b9764d3f7da'
+            '2bf07b65f0002765d754334d390422d589c142537a95c839e813aa73143e498f'
+            'fb43a98f6d5fcdd7fab4ce1d212c5719870a944e988c7becf0e8f87bfa688fe1'
             'fb094e52711eb397cdb968a69854d0e304bc31935f9893ec652642cce5557a6a'
             '802c2be2a71339c81f564457364a5fed1bc0a314ab6e08405063d219aeab2b6e'
             '09c6d6692d66f6561f3179e9b782bf8a8977da341927cc73f9097201c87b9cfb'
@@ -59,7 +61,7 @@ sha256sums=('c8455b8b3231698eb2d1db73bcb0f4ba89adf0a0b86f1035e5e256a5d2a73784'
             '07ecf36bce53dc5d7a58f53a806a561ca0cc9c290c484256205de0676f8d4d53'
             '5b6cf9b81f435e3527c4fdd108a88e4eb2037c0b1f66d2179c9fa7aeac6dcde3'
             'f568124d9a046e777f6ce9630ee603c98f25d4ce17436aa652dbcac45592a750'
-            'a87b404a7068f03916eaac8d042ccb391404a8bfb6cb20d689ad3a8ef056349e')
+            '6f608c17226c2fcd1831422e57d9e51eb1aceef69cc3b10db60f6109dfb3a608')
 
 prepare() {
     cd ${srcdir}/${_pkgname}-${pkgver}

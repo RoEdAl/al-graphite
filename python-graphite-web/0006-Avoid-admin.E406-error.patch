@@ -1,0 +1,24 @@
+From 5591b5639863da4ec4e286d511eefd97a89d6f66 Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Sun, 18 Aug 2019 18:11:00 +0200
+Subject: [PATCH 6/6] Avoid admin.E406 error
+
+admin.E406: django.contrib.messages must be in INSTALLED_APPS in order to use the admin application.
+
+Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
+
+diff --git a/webapp/graphite/app_settings.py b/webapp/graphite/app_settings.py
+index 9b39c990..5915e832 100644
+--- a/webapp/graphite/app_settings.py
++++ b/webapp/graphite/app_settings.py
+@@ -110,6 +110,7 @@ INSTALLED_APPS = (
+   'django.contrib.admin',
+   'django.contrib.contenttypes',
+   'django.contrib.staticfiles',
++  'django.contrib.messages',
+   'tagging',
+ )
+ if raven is not None:
+-- 
+2.22.1
+
