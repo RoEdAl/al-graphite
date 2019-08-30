@@ -3,7 +3,7 @@
 pkgname=python-graphite-web
 _pkgname=graphite-web
 pkgver=1.1.5
-pkgrel=5
+pkgrel=6
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -38,6 +38,8 @@ source=(
 	'graphite-web-paranoid-security.conf'
 	'graphite-web-carbon-user.conf'
 	'nginx-graphite.conf'
+	'graphite-web-createsuperuser.sh'
+	'graphite-web-changepassword.sh'
 )
 
 backup=(
@@ -61,7 +63,9 @@ sha256sums=('c8455b8b3231698eb2d1db73bcb0f4ba89adf0a0b86f1035e5e256a5d2a73784'
             '07ecf36bce53dc5d7a58f53a806a561ca0cc9c290c484256205de0676f8d4d53'
             '5bb4e5bad9cf94eddd4121e275e8cd385c84207ad8b7fe1b90fd812374e45496'
             'f568124d9a046e777f6ce9630ee603c98f25d4ce17436aa652dbcac45592a750'
-            '6e6d7b8c46eca6ccacbb0c8bce665329e70cfdc2f480775d3c5107cc4075bf17')
+            '6e6d7b8c46eca6ccacbb0c8bce665329e70cfdc2f480775d3c5107cc4075bf17'
+            'ec4bbe7e3e1d0113dfef6d5dcc34631d5c3bcebcb0430009c4d76cb8987a196e'
+            '6e0039b9666344631e7cd2eed2f5374976135bd850be21a4b905c772b819e779')
 
 prepare() {
     cd ${srcdir}/${_pkgname}-${pkgver}
@@ -104,7 +108,8 @@ package() {
     rm ${pkgdir}/usr/bin/run-graphite-devel-server.py
     rm ${pkgdir}/usr/bin/build-index.sh
     mv ${pkgdir}/usr/bin/build-index ${pkgdir}/usr/lib/${_pkgname}/build-index
-    rmdir ${pkgdir}/usr/bin
+    install -Dm755 ${srcdir}/graphite-web-createsuperuser.sh ${pkgdir}/usr/bin/graphite-web-createsuperuser
+    install -Dm755 ${srcdir}/graphite-web-changepassword.sh ${pkgdir}/usr/bin/graphite-web-changepassword
 
     # nginx - configuration
     install -Dm644 ${srcdir}/nginx-graphite.conf ${pkgdir}/usr/share/${_pkgname}/conf/nginx-graphite.conf
