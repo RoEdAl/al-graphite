@@ -58,4 +58,7 @@
      ~~~
      systemctl start graphite-web-collect-static
      ~~~
-   
+   * [Create first account](python-graphite-web/graphite-web-createsuperuser.sh)
+     ~~~
+     graphite-web-createsuperuser
+     ~~~
