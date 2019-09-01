@@ -3,7 +3,7 @@
 pkgname=python-graphite-web
 _pkgname=graphite-web
 pkgver=1.1.5
-pkgrel=6
+pkgrel=7
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -62,10 +62,10 @@ sha256sums=('c8455b8b3231698eb2d1db73bcb0f4ba89adf0a0b86f1035e5e256a5d2a73784'
             '157949a2a5da14c3328880d24af4e3e126c056cf602fae0376a01d4a5d9ba9d9'
             '07ecf36bce53dc5d7a58f53a806a561ca0cc9c290c484256205de0676f8d4d53'
             '5bb4e5bad9cf94eddd4121e275e8cd385c84207ad8b7fe1b90fd812374e45496'
-            'f568124d9a046e777f6ce9630ee603c98f25d4ce17436aa652dbcac45592a750'
+            'b857710404d9778082752c02f44ea91f52d5a6d5854b9d4114dc45e1aa83d9e6'
             '6e6d7b8c46eca6ccacbb0c8bce665329e70cfdc2f480775d3c5107cc4075bf17'
-            'ec4bbe7e3e1d0113dfef6d5dcc34631d5c3bcebcb0430009c4d76cb8987a196e'
-            '6e0039b9666344631e7cd2eed2f5374976135bd850be21a4b905c772b819e779')
+            'c5b826b804d8374041ba7994271f9d7164a8c63804a62f4839dbfaac2acc9ece'
+            'fc32bbfbc764c431ea89c8051c6e555856b8f8aca20d0b8a45c29ad2ebedc40e')
 
 prepare() {
     cd ${srcdir}/${_pkgname}-${pkgver}

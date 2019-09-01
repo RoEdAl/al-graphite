@@ -5,6 +5,5 @@ systemd-run \
 	"--description=Graphite - Web Application - Change a user's password" \
 	--pty \
 	--send-sighup \
-	--same-dir \
 	--quiet \
 	/usr/bin/django-admin changepassword --settings=graphite.settings "${@}"
