@@ -2,7 +2,7 @@
 
 pkgname=python-carbon
 _pkgname=carbon
-pkgver=1.1.5
+pkgver=1.1.6
 pkgrel=1
 pkgdesc='Twisted daemon that listens for time-series data'
 url='http://graphiteapp.org/'
@@ -38,7 +38,7 @@ source=(
   carbon-paranoid-security.conf
   carbon-carbon-user.conf
 )
-sha256sums=('fe4278eead6f2e8726c6576cdb0a6fde8a28cfd851309f82927ce6dcda38ff31'
+sha256sums=('b7f1fe903abb230e369df5caf85ed828c7ea72655097b5efce23c0780712929a'
             '8eca4b0afb540d94844dcbfeaf5f3bb7c9567753ae43f7b536ab4bf76fd5bf66'
             '7f0e7ddaaa1da41d03b26882cba812d8879f38530d3bda197675039cef10c8b4'
             'a8431c6ea63efdd1a9898a94c90afcf33307c8d266c977d6e86244bfc0ddefe1'

@@ -2,7 +2,7 @@
 
 pkgname=python-whisper
 _pkgname=whisper
-pkgver=1.1.5
+pkgver=1.1.6
 pkgrel=1
 pkgdesc='Database library for storing time-series data'
 url='http://graphiteapp.org/'
@@ -11,7 +11,7 @@ license=('Apache 2.0')
 depends=('python' 'python-cachetools' 'python-protobuf' 'python-twisted')
 makedepends=('python-setuptools')
 source=("${_pkgname}-${pkgver}.tar.gz::http://github.com/graphite-project/whisper/archive/${pkgver}.tar.gz")
-sha256sums=('22f6b5c9e793a93e083c2d449f5407364976b124bb7e12f4f32712a75117d47e')
+sha256sums=('9bd56070e2f524cc58bae7eff3af5f04d5c6e1262e2c7d4080d11b377b9dff40')
 
 build() { 
   cd "${srcdir}/${_pkgname}-${pkgver}"
