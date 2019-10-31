@@ -2,7 +2,7 @@
 
 pkgname=python-django-tagging
 _pkgname=django-tagging
-pkgver=0.4.5
+pkgver=0.4.6
 pkgrel=1
 pkgdesc="A generic tagging application for Django projects"
 arch=('any')
@@ -11,7 +11,7 @@ license=('MIT')
 depends=('python-django')
 makedepends=('python-setuptools')
 source=("https://pypi.python.org/packages/source/d/django-tagging/django-tagging-${pkgver}.tar.gz")
-sha256sums=('98fc9d3bd9387d5c7c44c31a753a6f93385a6b314803488954968a75cd0b7102')
+sha256sums=('210b32af8372b8f68f261fdb7394075669222608d1e6a3bbf2031d59c826eb68')
 
 build() { 
   cd "${srcdir}/${_pkgname}-${pkgver}"

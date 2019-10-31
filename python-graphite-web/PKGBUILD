@@ -3,7 +3,7 @@
 pkgname=python-graphite-web
 _pkgname=graphite-web
 pkgver=1.1.6
-pkgrel=1
+pkgrel=2
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -11,7 +11,7 @@ license=('Apache 2.0')
 depends=(
   python-cairo python-urllib3 python-simplejson python-pyparsing python-whitenoise python-memcached python-pytz
   python-systemd
-  python-django python-django-tagging 
+  'python-django<2.3' 'python-django-tagging>=0.4.6'
   uwsgi uwsgi-plugin-python
   ttf-dejavu  python-whisper 
   "carbon>=${pkgver}"
