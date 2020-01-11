@@ -3,15 +3,29 @@
 pkgname=python-django-tagging
 _pkgname=django-tagging
 pkgver=0.4.6
-pkgrel=2
+pkgrel=3
 pkgdesc="A generic tagging application for Django projects"
 arch=('any')
 url='https://pypi.python.org/pypi/django-tagging'
 license=('MIT')
-depends=('python-django')
+depends=('python-django' 'python-six')
 makedepends=('python-setuptools')
-source=("https://pypi.python.org/packages/source/d/django-tagging/django-tagging-${pkgver}.tar.gz")
-sha256sums=('210b32af8372b8f68f261fdb7394075669222608d1e6a3bbf2031d59c826eb68')
+_patches=(
+	'0001-Use-python_2_unicode_compatible-from-six-module.patch'
+)
+source=("https://pypi.python.org/packages/source/d/django-tagging/django-tagging-${pkgver}.tar.gz"
+	${_patches[@]}
+)
+sha256sums=('210b32af8372b8f68f261fdb7394075669222608d1e6a3bbf2031d59c826eb68'
+            '2cbd40a17a84ff4290010f89f95ff8a6080ad82850f912292aa0cc80800d9e18')
+
+prepare() {
+    cd ${srcdir}/${_pkgname}-${pkgver}
+    for p in ${_patches[@]}; do
+      msg2 "Applying $p"
+      git apply ${srcdir}/${p}
+    done
+}
 
 build() { 
   cd "${srcdir}/${_pkgname}-${pkgver}"

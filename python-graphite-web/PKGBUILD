@@ -3,7 +3,7 @@
 pkgname=python-graphite-web
 _pkgname=graphite-web
 pkgver=1.1.6
-pkgrel=3
+pkgrel=5
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -11,7 +11,7 @@ license=('Apache 2.0')
 depends=(
   python-cairo python-urllib3 python-simplejson python-pyparsing python-whitenoise python-memcached python-pytz
   python-systemd
-  'python-django<2.3' 'python-django-tagging>=0.4.6'
+  'python-django' 'python-django-tagging>=0.4.6'
   uwsgi uwsgi-plugin-python
   ttf-dejavu  python-whisper 
   "carbon>=${pkgver}"
@@ -22,6 +22,8 @@ _patches=(
     '0002-Support-logging-to-systemd-journal.patch'
     '0003-util.logtime-raise-log-level-from-info-to-debug.patch'
     '0004-metrics.view-raise-log-level-from-info-to-debug.patch'
+    '0005-use-render-instead-of-deprecated-render_to_response.patch'
+    '0006-Use-load-static-instead-of-load-staticfiles-in-page-.patch'
 )
 source=(
         "${_pkgname}-${pkgver}.tar.gz::http://github.com/graphite-project/graphite-web/archive/${pkgver}.tar.gz"
@@ -46,10 +48,12 @@ backup=(
 )
 
 sha256sums=('bd68fd243fa95e92e06d704651fb2257aba6b478a61b847090e458d94578f5df'
-            '3bd995ee1e517d7c10c0dfe51a0ebfe5810b893ee4ac23449ba7b2e726964da4'
-            'b579b5c4dd87013adb7b8486c599e912fdc050ef5f05c6ebb3c0a06abcdcc4c5'
-            'ffa8d55996d36d52bc7ec04c928cf862c6ca0c670d8a9175cfdf8b21e7d398cf'
-            '6f87c6bc0b0b34022ddce3d5d0476bfad15133afd32874a6932dbc038e082d16'
+            '75b8955d5d41c2e8d8ad86e5ed97281f764ca6b605ac7c00689a350c014fc9c0'
+            '9a163837ab58bf118e34298aa186a7b010cdd9f3d7645151a8c01a2afccda525'
+            '800257e21523c3744273ad76144128f7f9e6d9bc99f6eb7fdfb21af32f52f52a'
+            '95da3db942062d885f068e4ddfd69844d5ed0eb669c2d6d5bb5d79a2df2f511e'
+            'bc14ae0b94f523a32c17a8a8eb82020bece4f58482659a27d3a30b0e1c3cba17'
+            '5cb823bc39f085272f40ddfba18535a6f90ef0d97f453b3771006cc92819203a'
             'fb094e52711eb397cdb968a69854d0e304bc31935f9893ec652642cce5557a6a'
             '802c2be2a71339c81f564457364a5fed1bc0a314ab6e08405063d219aeab2b6e'
             '09c6d6692d66f6561f3179e9b782bf8a8977da341927cc73f9097201c87b9cfb'

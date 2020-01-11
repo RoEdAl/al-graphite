@@ -1,7 +1,7 @@
 From ae8f4c40cc330db94610e90b92826bafba80c2e7 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 21:15:20 +0100
-Subject: [PATCH 4/4] metrics.view - raise log level from info to debug
+Subject: [PATCH 4/6] metrics.view - raise log level from info to debug
 
 Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
@@ -23,5 +23,5 @@ index df6978b0..c56b234a 100644
    if format == 'treejson':
      profile = getProfile(request)
 -- 
-2.23.0
+2.24.1
 
