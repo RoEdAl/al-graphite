@@ -1,4 +1,4 @@
-From 1d27a7ef452cdfcc7dd6796102bae4b1d36cef2c Mon Sep 17 00:00:00 2001
+From 279ec62f1da7ef3a84a7936b29c5586dbf1bb9d6 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
 Date: Tue, 26 Mar 2019 21:52:24 +0100
 Subject: [PATCH] Simplify logging to console (stdout)
@@ -45,5 +45,5 @@ index cdb53ed..ab95b75 100644
  
  logToDir = carbonLogObserver.log_to_dir
 -- 
-2.21.0
+2.26.0
 

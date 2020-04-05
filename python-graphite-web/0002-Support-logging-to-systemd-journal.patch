@@ -1,26 +1,22 @@
-From 2b83439511c0a88b3cc1804aa1b83046c1a61b4d Mon Sep 17 00:00:00 2001
-From: Edmunt Pienkowsky <reod@onet.eu>
-Date: Tue, 26 Mar 2019 20:05:08 +0100
-Subject: [PATCH 2/6] Support logging to systemd journal
+From 5cb30b7f7b29e1108599f1f1b763f544d3e7938b Mon Sep 17 00:00:00 2001
+From: Edmunt Pienkowsky <roed@onet.eu>
+Date: Sun, 5 Apr 2020 08:31:42 +0200
+Subject: [PATCH 2/4] Support logging to systemd journal
 
-By specyifying + as log filename.
-
-Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
-Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/webapp/graphite/logger.py b/webapp/graphite/logger.py
-index 9cbc4699..b7f71305 100644
+index c75f3802..aaa3b82e 100644
 --- a/webapp/graphite/logger.py
 +++ b/webapp/graphite/logger.py
-@@ -27,6 +27,7 @@ try:
-     from logging import FileHandler, StreamHandler
- except ImportError as ie:  # py2.6
-     from logging.handlers import FileHandler, StreamHandler
+@@ -17,6 +17,7 @@ import logging
+ from logging.handlers import TimedRotatingFileHandler as Rotater
+ from logging import NullHandler, FileHandler, StreamHandler
+ 
 +from systemd.journal import JournalHandler;
  from django.conf import settings
  
  
-@@ -69,6 +70,9 @@ class GraphiteLogger:
+@@ -59,6 +60,9 @@ class GraphiteLogger:
                  fmt='[%(asctime)s.%(msecs)03d] %(name)s %(levelname)s %(message)s',
                  datefmt='%d/%b/%Y %H:%M:%S')
              handler = StreamHandler()
@@ -31,5 +27,5 @@ index 9cbc4699..b7f71305 100644
              formatter = logging.Formatter(
                  fmt='%(asctime)s.%(msecs)03d :: %(message)s',
 -- 
-2.24.1
+2.26.0
 

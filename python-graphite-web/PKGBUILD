@@ -2,8 +2,8 @@
 
 pkgname=python-graphite-web
 _pkgname=graphite-web
-pkgver=1.1.6
-pkgrel=5
+pkgver=1.1.7
+pkgrel=1
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -22,8 +22,6 @@ _patches=(
     '0002-Support-logging-to-systemd-journal.patch'
     '0003-util.logtime-raise-log-level-from-info-to-debug.patch'
     '0004-metrics.view-raise-log-level-from-info-to-debug.patch'
-    '0005-use-render-instead-of-deprecated-render_to_response.patch'
-    '0006-Use-load-static-instead-of-load-staticfiles-in-page-.patch'
 )
 source=(
         "${_pkgname}-${pkgver}.tar.gz::http://github.com/graphite-project/graphite-web/archive/${pkgver}.tar.gz"
@@ -47,13 +45,11 @@ backup=(
     "etc/${_pkgname}/uwsgi-graphite.ini"
 )
 
-sha256sums=('bd68fd243fa95e92e06d704651fb2257aba6b478a61b847090e458d94578f5df'
-            '75b8955d5d41c2e8d8ad86e5ed97281f764ca6b605ac7c00689a350c014fc9c0'
-            '9a163837ab58bf118e34298aa186a7b010cdd9f3d7645151a8c01a2afccda525'
-            '800257e21523c3744273ad76144128f7f9e6d9bc99f6eb7fdfb21af32f52f52a'
-            '95da3db942062d885f068e4ddfd69844d5ed0eb669c2d6d5bb5d79a2df2f511e'
-            'bc14ae0b94f523a32c17a8a8eb82020bece4f58482659a27d3a30b0e1c3cba17'
-            '5cb823bc39f085272f40ddfba18535a6f90ef0d97f453b3771006cc92819203a'
+sha256sums=('e8522310913f22f3e93fc96e63b39877153e96f051d3d3dd4d417accfb77fd68'
+            '89e999d2e3324fca26f6e67300e13966d585220779bfcb36f8fbde9039d04467'
+            'adcb32ed78f408d1a8544bda91b7bcbf33dc1a7c9a802e9c231886800f6325af'
+            'db4cc819705675adfb63df6ff0c9029bd6a62429e44e69539a1734831035c5ec'
+            'f9679d7a0371065612b07e8ffe55261fcc3b32c4f5032927270ea99e5387db3e'
             'fb094e52711eb397cdb968a69854d0e304bc31935f9893ec652642cce5557a6a'
             '802c2be2a71339c81f564457364a5fed1bc0a314ab6e08405063d219aeab2b6e'
             '09c6d6692d66f6561f3179e9b782bf8a8977da341927cc73f9097201c87b9cfb'
