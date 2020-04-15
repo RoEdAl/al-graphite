@@ -3,7 +3,7 @@
 pkgname=python-graphite-web
 _pkgname=graphite-web
 pkgver=1.1.7
-pkgrel=1
+pkgrel=2
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -63,6 +63,8 @@ sha256sums=('e8522310913f22f3e93fc96e63b39877153e96f051d3d3dd4d417accfb77fd68'
             'c5b826b804d8374041ba7994271f9d7164a8c63804a62f4839dbfaac2acc9ece'
             'fc32bbfbc764c431ea89c8051c6e555856b8f8aca20d0b8a45c29ad2ebedc40e')
 
+_setup_opts=(--quiet --no-user-cfg)
+
 prepare() {
     cd ${srcdir}/${_pkgname}-${pkgver}
     for p in ${_patches[@]}; do
@@ -73,12 +75,14 @@ prepare() {
 
 build() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    python setup.py build
+    env GRAPHITE_NO_PREFIX=True  \
+        python setup.py ${_setup_opts[@]} build
 }
 
 package() {
     cd ${srcdir}/${_pkgname}-${pkgver}
-    env GRAPHITE_NO_PREFIX=True  python setup.py install --root=${pkgdir} --optimize=2
+    env GRAPHITE_NO_PREFIX=True  \
+        python setup.py ${_setup_opts[@]} install --root=${pkgdir} --optimize=2
     rm -rf $pkgdir/srv/graphite
 
     # additional files

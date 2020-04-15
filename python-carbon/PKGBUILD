@@ -3,12 +3,13 @@
 pkgname=python-carbon
 _pkgname=carbon
 pkgver=1.1.7
-pkgrel=1
+pkgrel=2
 pkgdesc='Twisted daemon that listens for time-series data'
 url='http://graphiteapp.org/'
 arch=('any')
 license=('Apache 2.0')
 depends=('python' 'python-twisted' 'python-cachetools' 'python-protobuf' 'python-urllib3' 'python-six' "python-whisper>=${pkgver}")
+optdepends=('python-txamqp')
 makedepends=('python-setuptools')
 provides=("carbon=${pkgver}")
 backup=(
@@ -56,6 +57,8 @@ sha256sums=('8541a9c25aada40009770bac877dd730edac0ef27613509049d9ee8d5a4f5244'
             '6257941d49e8e430fd41a5281835cf208aa856ca1ea140eb8c7cadc27fcd1e43'
             'f568124d9a046e777f6ce9630ee603c98f25d4ce17436aa652dbcac45592a750')
 
+_setup_opts=(--quiet --no-user-cfg)
+
 prepare() {
   cd ${srcdir}/${_pkgname}-${pkgver}
   for p in ${_patches[@]}; do
@@ -66,13 +69,17 @@ prepare() {
 
 build() { 
   cd "${srcdir}/${_pkgname}-${pkgver}"
-  python setup.py build
+  env GRAPHITE_NO_PREFIX=True \
+      USE_SETUPTOOLS=True \
+      python setup.py ${_setup_opts[@]} build
 }
 
 package() {
   cd "${srcdir}/${_pkgname}-${pkgver}"
 
-  env GRAPHITE_NO_PREFIX=True python setup.py install --root=${pkgdir} --optimize=2
+  env GRAPHITE_NO_PREFIX=True \
+      USE_SETUPTOOLS=True \
+      python setup.py ${_setup_opts[@]} install --root=${pkgdir} --optimize=2
 
   install -d -m755 ${pkgdir}/usr/share/${_pkgname}
   rm -rf ${pkgdir}/usr/storage
