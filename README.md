@@ -3,6 +3,7 @@
 1. Download (or build) and install following packages:
 
    * **python-whisper**,
+   * python-txamqp (optionally used by **python-carbon**),
    * **python-carbon**,
    * python-django-tagging (required by **python-graphite-web**),
    * **python-graphite-web**.
