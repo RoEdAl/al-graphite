@@ -3,7 +3,7 @@
 pkgname=python-whisper
 _pkgname=whisper
 pkgver=1.1.7
-pkgrel=2
+pkgrel=3
 pkgdesc='Database library for storing time-series data'
 url='http://graphiteapp.org/'
 arch=('any')
