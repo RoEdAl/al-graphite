@@ -1,4 +1,4 @@
-From 5e40b9c592a7168a6d5e8b343a00d37a00597d38 Mon Sep 17 00:00:00 2001
+From d4ab95d4f0ca9e3bac52854f7492243f44a0e025 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 21:05:19 +0100
 Subject: [PATCH 3/4] util.logtime - raise log level from info to debug
@@ -7,10 +7,10 @@ Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/webapp/graphite/util.py b/webapp/graphite/util.py
-index 6b4cc559..10d29559 100644
+index 1b620331..b27bbdb2 100644
 --- a/webapp/graphite/util.py
 +++ b/webapp/graphite/util.py
-@@ -257,7 +257,7 @@ class Timer(object):
+@@ -260,7 +260,7 @@ class Timer(object):
      self.name = name
  
    def stop(self):
@@ -19,6 +19,3 @@ index 6b4cc559..10d29559 100644
        '{name} :: {msg} {sec:.6}s'.format(
          name=self.name,
          msg=self.msg,
--- 
-2.26.0
-

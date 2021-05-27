@@ -2,8 +2,8 @@
 
 pkgname=python-graphite-web
 _pkgname=graphite-web
-pkgver=1.1.7
-pkgrel=3
+pkgver=1.1.8
+pkgrel=1
 pkgdesc="Enterprise-scale monitoring tool - web frontend an backend"
 url='http://graphiteapp.org/'
 arch=('any')
@@ -45,11 +45,11 @@ backup=(
     "etc/${_pkgname}/uwsgi-graphite.ini"
 )
 
-sha256sums=('e8522310913f22f3e93fc96e63b39877153e96f051d3d3dd4d417accfb77fd68'
-            '89e999d2e3324fca26f6e67300e13966d585220779bfcb36f8fbde9039d04467'
-            'adcb32ed78f408d1a8544bda91b7bcbf33dc1a7c9a802e9c231886800f6325af'
-            'db4cc819705675adfb63df6ff0c9029bd6a62429e44e69539a1734831035c5ec'
-            'f9679d7a0371065612b07e8ffe55261fcc3b32c4f5032927270ea99e5387db3e'
+sha256sums=('6e35629493b9be77fa9902471053f6789e300c06fe74a0215253d986fc0b866c'
+            'ff2d27f635e8e01c6c0daddf648cea476638d74e0b6432ae4421f3320478a6ba'
+            '563cec5431b9aeaf1f6423c4970253f31a7396a2960b0cd8410321dfb7e21c2b'
+            '80011fe517443f6a0ee41ea35f9f27e4972e0b15865340c52999f115f698928a'
+            '02c4882fc64d45c71fe381399ee16f793f8c714f55101e3b4c95d67b95b5eba4'
             'fb094e52711eb397cdb968a69854d0e304bc31935f9893ec652642cce5557a6a'
             '802c2be2a71339c81f564457364a5fed1bc0a314ab6e08405063d219aeab2b6e'
             '09c6d6692d66f6561f3179e9b782bf8a8977da341927cc73f9097201c87b9cfb'

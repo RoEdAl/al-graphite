@@ -1,4 +1,4 @@
-From f7576e973922c0f9d1cee8ff1287814814c309e7 Mon Sep 17 00:00:00 2001
+From 57cfb2a3f45ca4f2368f2cbaaaa9b8fe0a1a7dda Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <reod@onet.eu>
 Date: Tue, 26 Mar 2019 21:15:20 +0100
 Subject: [PATCH 4/4] metrics.view - raise log level from info to debug
@@ -7,10 +7,10 @@ Signed-off-by: Edmunt Pienkowsky <reod@onet.eu>
 Signed-off-by: Edmunt Pienkowsky <roed@onet.eu>
 
 diff --git a/webapp/graphite/metrics/views.py b/webapp/graphite/metrics/views.py
-index f7a1a42f..d1afd68e 100644
+index 1b253fd8..062ec4ae 100644
 --- a/webapp/graphite/metrics/views.py
 +++ b/webapp/graphite/metrics/views.py
-@@ -167,9 +167,9 @@ def find_view(request):
+@@ -172,9 +172,9 @@ def find_view(request):
      log.exception()
      raise
  
@@ -22,6 +22,3 @@ index f7a1a42f..d1afd68e 100644
  
    if format == 'treejson':
      profile = getProfile(request)
--- 
-2.26.0
-

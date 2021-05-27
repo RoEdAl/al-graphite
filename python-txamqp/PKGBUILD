@@ -2,8 +2,8 @@
 # based on AUR package python2-txamqp
 
 pkgname=python-txamqp
-pkgver=0.8.0
-pkgrel=2
+pkgver=0.8.2
+pkgrel=1
 pkgdesc='Python library for communicating with AMQP peers and brokers using Twisted'
 arch=('any')
 url='http://github.com/txamqp/txamqp'
@@ -12,7 +12,7 @@ depends=('python' 'python-twisted')
 makedepends=('python-setuptools')
 options=(!emptydirs)
 source=("${pkgname}-${pkgver}.tar.gz::http://github.com/txamqp/txamqp/archive/${pkgver}.tar.gz")
-sha256sums=('b1197d2ef0beb96d9bed42f7d17bc2708006c880b738aa2b87102832de6ea7ab')
+sha256sums=('af6ac1e21f66cde4601552e611ebb60ab53dabb030165d6b6a96206f50877218')
 _setup_opts=(--quiet --no-user-cfg)
 
 build() { 

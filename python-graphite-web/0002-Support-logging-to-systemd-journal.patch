@@ -1,11 +1,11 @@
-From 5cb30b7f7b29e1108599f1f1b763f544d3e7938b Mon Sep 17 00:00:00 2001
+From 599534180202f5d5688b0471a02e795822e95012 Mon Sep 17 00:00:00 2001
 From: Edmunt Pienkowsky <roed@onet.eu>
-Date: Sun, 5 Apr 2020 08:31:42 +0200
+Date: Thu, 27 May 2021 10:03:23 +0200
 Subject: [PATCH 2/4] Support logging to systemd journal
 
 
 diff --git a/webapp/graphite/logger.py b/webapp/graphite/logger.py
-index c75f3802..aaa3b82e 100644
+index 10bdcd2f..c668b9b1 100644
 --- a/webapp/graphite/logger.py
 +++ b/webapp/graphite/logger.py
 @@ -17,6 +17,7 @@ import logging
@@ -17,15 +17,12 @@ index c75f3802..aaa3b82e 100644
  
  
 @@ -59,6 +60,9 @@ class GraphiteLogger:
-                 fmt='[%(asctime)s.%(msecs)03d] %(name)s %(levelname)s %(message)s',
-                 datefmt='%d/%b/%Y %H:%M:%S')
-             handler = StreamHandler()
-+        elif log_file_name == '+':
-+            formatter = logging.Formatter()
-+            handler = JournalHandler(SYSLOG_IDENTIFIER='graphite')
-         else:
-             formatter = logging.Formatter(
-                 fmt='%(asctime)s.%(msecs)03d :: %(message)s',
--- 
-2.26.0
-
+                     fmt='[%(asctime)s.%(msecs)03d] %(name)s %(levelname)s %(message)s',
+                     datefmt='%d/%b/%Y %H:%M:%S')
+                 handler = StreamHandler()
++            elif log_file_name == '+':
++                formatter = logging.Formatter()
++                handler = JournalHandler(SYSLOG_IDENTIFIER='graphite')
+             else:
+                 formatter = logging.Formatter(
+                     fmt='%(asctime)s.%(msecs)03d :: %(message)s',
