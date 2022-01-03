@@ -3,7 +3,7 @@
 
 pkgname=python-txamqp
 pkgver=0.8.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Python library for communicating with AMQP peers and brokers using Twisted'
 arch=('any')
 url='http://github.com/txamqp/txamqp'

@@ -3,7 +3,7 @@
 pkgname=python-carbon
 _pkgname=carbon
 pkgver=1.1.8
-pkgrel=1
+pkgrel=2
 pkgdesc='Twisted daemon that listens for time-series data'
 url='http://graphiteapp.org/'
 arch=('any')
